@@ -68,11 +68,4 @@ CodeAlpha_Tasks/
 
 ---
 
-📬 Connect with Me
-
-- LinkedIn: (Add your LinkedIn link here)
-- GitHub: (Your GitHub profile link)
-
----
-
 ⭐ Feel free to explore the projects and give feedback!
