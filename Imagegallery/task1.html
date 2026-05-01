@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Image Gallery</title>
+<link rel="stylesheet" href="task1.css">
+</head>
+
+<body>
+<h1 class="title">Image Gallery</h1>
+
+<div class="controls">
+
+    <!-- Hidden file input -->
+    <input type="file" id="fileInput" hidden>
+
+    <!-- Custom Upload Button -->
+    <label for="fileInput" class="upload-btn">
+        📁 Choose Image
+    </label>
+
+    <!-- Category -->
+    <select id="category">
+        <option value="nature">🌿 Nature</option>
+        <option value="animals">🐾 Animals</option>
+        <option value="cities">🏙 Cities</option>
+    </select>
+
+    <button onclick="addImage()" class="add-btn">➕ Add Image</button>
+
+</div>
+
+<!-- Filter Buttons -->
+<div class="filters">
+    <button onclick="filterImages('all')">All</button>
+    <button onclick="filterImages('nature')">Nature</button>
+    <button onclick="filterImages('animals')">Animals</button>
+    <button onclick="filterImages('cities')">Cities</button>
+</div>
+
+<!-- Gallery -->
+<div class="gallery" id="gallery">
+
+    <!-- Nature -->
+    <div class="card nature">
+        <img src="https://gosharpener.com/content/uploads/photos/2024/09/sngine_049cc2e2c71a11e133a4d0921f515a83.webp">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+
+    <div class="card nature">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/049/855/296/small/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+    <div class="card nature">
+        <img src="https://img.freepik.com/premium-photo/nature-landscape_1086760-380940.jpg?semt=ais_hybrid&w=740&q=80">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+    <!-- Animals -->
+    <div class="card animals">
+        <img src="https://a-z-animals.com/media/tiger_laying_hero_background.jpg">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+    <div class="card animals">
+        <img src="https://cdn.mos.cms.futurecdn.net/TVR7E3Kuzg2iRhKkjZPeWk.jpg">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+    <div class="card animals">
+        <img src="https://cdn.britannica.com/94/494-050-A674AD3A/Fallow-deer-dama-dama.jpg">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+    <!-- Cities -->
+    <div class="card cities">
+        <img src="https://ichef.bbci.co.uk/images/ic/480xn/p0m9nmh0.jpg.webp">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+    <div class="card cities">
+        <img src="https://www.atlasandboots.com/wp-content/uploads/2025/01/Best-cities-London-sunset-phonebox.jpg">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+    <div class="card cities">
+        <img src="https://loveincorporated.blob.core.windows.net/contentimages/gallery/c2a4527b-ebdd-451a-8cde-c0f2e6838138-beautifulcities_Shanghai.jpg">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+    <div class="card cities">
+        <img src="https://www.forbes.com.au/wp-content/uploads/2025/01/GettyImages-2072548607.jpg?w=1024">
+        <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+    </div>
+
+</div>
+
+<script>
+// Add Image
+function addImage() {
+    let fileInput = document.getElementById("fileInput");
+    let category = document.getElementById("category").value;
+    let gallery = document.getElementById("gallery");
+
+    let file = fileInput.files[0];
+    if (!file) {
+        alert("Select an image!");
+        return;
+    }
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        let card = document.createElement("div");
+        card.className = "card " + category;
+
+        card.innerHTML = `
+            <img src="${e.target.result}">
+            <button class="delete-btn" onclick="deleteImage(this)">🗑</button>
+        `;
+
+        gallery.appendChild(card);
+    };
+
+    reader.readAsDataURL(file);
+}
+
+// Delete
+function deleteImage(btn) {
+    btn.closest(".card").remove();
+}
+
+// Filter
+function filterImages(category) {
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        if (category === "all" || card.classList.contains(category)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>
