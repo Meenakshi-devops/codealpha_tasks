@@ -1,92 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link rel="stylesheet" href="task2.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Player</title>
+<link rel="stylesheet" href="task2.css">
 </head>
-
 <body>
-    <div class="container">
-        <div class="Calculator" id="containers">
-            <input type="text" placeholder="0" id="Output-Screen">
-            <button onclick="clearscreen()">CL</button>
-            <button onclick="del()">DEL</button>
-            <button onclick="display('%')">%</button>
-            <button onclick="display('÷')">÷</button>
-            <button onclick="display('7')">7</button>
-            <button onclick="display('8')">8</button>
-            <button onclick="display('9')">9</button>
-            <button onclick="display('x')">x</button>
-            <button onclick="display('4')">4</button>
-            <button onclick="display('5')">5</button>
-            <button onclick="display('6')">6</button>
-            <button onclick="display('-')">-</button>
-            <button onclick="display('1')">1</button>
-            <button onclick="display('2')">2</button>
-            <button onclick="display('3')">3</button>
-            <button onclick="display('.')">.</button>
-            <button onclick="display('+')">+</button>
-            <button onclick="display('0')">0</button>
-            <button onclick="calculate()" id="equal">=</button>
 
+<div class="player pink" id="player">
 
-
-        </div>
+    <!-- Top -->
+    <div class="top">
+        <button class="icon">❮</button>
+        <button class="icon">≡</button>
     </div>
-    <button onclick="change()" id="changebutton">change my color</button>
-    <script>
-        let outputonScreen = document.getElementById("Output-Screen");
-        let shouldClear = false;
-        document.addEventListener("keydown", function (e) {
-            if (!isNaN(e.key) || "+-*/.%".includes(e.key)) {
-                display(e.key);
-            } else if (e.key === "Enter") {
-                calculate();
-            } else if (e.key === "Backspace") {
-                del();
-            } else if (e.key === "Escape") {
-                clearscreen();
-            }
-        });
 
+    <!-- Image -->
+    <div class="cover">
+        <img id="cover" src="songimg1.jpeg" alt="song">
+    </div>
 
-        function display(num) {
-            if (outputonScreen.value === "0") {
-                outputonScreen.value = num;   // replace 0
-            } else {
-                outputonScreen.value += num;  // append normally
-            }
-        }
-        function calculate() {
-            try {
-                let expression = outputonScreen.value
-                    .replace(/÷/g, '/')
-                    .replace(/x/g, '*');
+    <!-- Info -->
+    <div class="info">
+        <h2 id="title">Song Title</h2>
+        <p id="artist">Artist</p>
+    </div>
 
-                outputonScreen.value = eval(expression);
-            } catch {
-                alert("Invalid input");
-            }
-        }
-        function del() {
-            outputonScreen.value = outputonScreen.value.slice(0, -1);
-        }
-        function clearscreen() {
-            outputonScreen.value = "0";
-        }
+    <!-- Progress -->
+    <input type="range" id="progress" value="0">
 
-        function change() {
-            document.getElementById("containers").classList.toggle("dark");
-            document.getElementById("changebutton").classList.toggle("dark");
-        }
+    <!-- Controls -->
+    <div class="controls">
+        <button class="small" id="prev">⏮</button>
+        <button class="play" id="play">▶</button>
+        <button class="small" id="next">⏭</button>
+    </div>
 
+</div>
 
+<audio id="audio"></audio>
 
-    </script>
-
+<script src="script.js"></script>
 </body>
-
 </html>
